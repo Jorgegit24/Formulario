@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tarea 3 Formulario</title>
+    <style type="text/css">
+        body { 
+            background-color: coral; 
+            font-family: Arial, sans-serif; 
+            padding: 20px;
+        }
+        h1 {
+            color: #2c3e50;
+        }
+        .formulario {
+            background-color: rgba(215, 130, 38, 0.713);
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 
+                0 4px 15px rgba(0, 0, 0, 0.1),  
+                0 10px 20px rgba(0, 0, 0, 0.50); 
+            width: 40%;
+            border: 1px solid #ccc; 
+            text-shadow: #2c3e50;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input {
+            width: 80%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type="submit"], input[type="reset"], button {
+            width: auto;
+            background-color: white;
+            color: black;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            margin-top: 10px;
+        }
+        input[type="submit"]:hover, input[type="reset"]:hover, button:hover {
+            background-color: #34495e;
+        }
+        img {
+            vertical-align: middle;
+            margin-left: 10px;
+        }
+        #resultado {
+            margin-top: 3%;
+            background-color: rgba(215, 130, 38, 0.713);
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 
+                0 4px 15px rgba(0, 0, 0, 0.1),  
+                0 10px 20px rgba(0, 0, 0, 0.50); 
+            width: 40%;
+            border: 1px solid #ccc; 
+            text-shadow: #2c3e50;
+        }
+        #saludo {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #2c3e50;
+        }
+    </style>
+</head>
+<body>
+    <center>
+    <h1>FORMULARIO</h1>
+    <h3>Por favor, llena el Formulario</h3>
+         
+    <div id="saludo"></div> 
+
+    <form name="miniformualario" class="formulario" method="get" onsubmit="return validarDatos()">
+        <label>Nombre</label>
+        <input type="text" id="nombre" name="nombre" placeholder="Ingrese su Nombre"/><img width="70" height="70" src="./imagenes/ok.png" />
+        
+        <label>Apellido</label>
+        <input type="text" id="apellido" name="apellido" placeholder="Ingrese su Apellido"/><img width="70" height="70" src="./imagenes/ok.png" />
+        
+        <label>Edad</label>
+        <input type="text" id="edad" name="edad" placeholder="Ingrese su Edad"/><img width="70" height="70" src="./imagenes/ok.png" />
+        
+        <label>Correo electrónico</label>
+        <input type="text" id="email" name="email" placeholder="Ingrese su E-mail"/><img width="70" height="70" src="./imagenes/ok.png" />
+        
+        <center>
+        <input type="submit" value="Enviar"/>
+        <input type="reset" value="Reiniciar datos"/>
+        </center>
+    </form><br>
+
+    <h2>Datos Capturados:</h2> 
+    <div id="resultado"></div><br>
+    <button onclick="capturarNuevosDatos()">Capturar Nuevos Datos</button>
+    <button onclick="nuevoUsuario()">Nuevo Usuario</button>
+
+</center>  
+    <script>
+        var nombreOk = false;
+        var apellidoOk = false;
+        var edadOk = false;
+        var emailOk = false;
+
+        //Funcion para saludar al usuario
+        window.onload = function () {
+            saludarUsuario(); 
+            var everyInputs = document.getElementsByTagName('input');
+            for (var i = 0; i < (everyInputs.length); i++) {
+                everyInputs[i].addEventListener('focus', estilo);
+                everyInputs[i].addEventListener('blur', estilo2);
+                var nodoname = everyInputs[i].name;
+
+                switch (nodoname) {
+                    case "nombre":
+                        everyInputs[i].addEventListener('blur', validarNombre);
+                        break;
+                    case "apellido":
+                        everyInputs[i].addEventListener('blur', validarApellido);
+                        break;
+                    case "edad":
+                        everyInputs[i].addEventListener('blur', validarEdad);
+                        break;
+                    case "email":
+                        everyInputs[i].addEventListener('blur', validarEmail);
+                        break;
+                    default: break;
+                }
+            }
+        }
+
+        function saludarUsuario() {
+            var nombre = prompt('¿Cómo te llamas?');
+            if (nombre) {
+                document.getElementById("saludo").innerHTML = "¡Hola, cómo estás! " + nombre + "<br><br>";
+                alert("Saludando al Usuario " + nombre);
+            }
+        }
+
+        function estilo() {
+            this.style.backgroundColor = "white";
+        }
+
+        function estilo2(inputElement) {
+            this.style.background = 'transparent';
+            this.nextSibling.src = "./imagenes/ok.png";
+        }
+
+        function estiloRojo(inElement) {
+            inElement.style.backgroundColor = "red";
+            inElement.nextSibling.src = "./imagenes/ok.jpg";
+        }
+
+        function validarNombre() {
+            var nombre = document.getElementById("nombre");
+            var expresionRegular = /^\w{3,}$/;
+            if (expresionRegular.test(nombre.value)) {
+                nombreOk = true;
+                estilo2(nombre);
+            } else {
+                nombreOk = false;
+                estiloRojo(nombre);
+            }
+        }
+
+        function validarApellido() {
+            var apellido = document.getElementById("apellido");
+            var expresionRegular = /^\w{3,}$/;
+            if (expresionRegular.test(apellido.value)) {
+                apellidoOk = true;
+                estilo2(apellido);
+            } else {
+                apellidoOk = false;
+                estiloRojo(apellido);
+            }
+        }
+
+        function validarEdad() {
+            var edad = document.getElementById("edad");
+            if (edad.value > 10 && edad.value < 200) {
+                edadOk = true;
+                estilo2(edad);
+            } else {
+                edadOk = false;
+                estiloRojo(edad);
+            }
+        }
+
+        function validarEmail() {
+            var valorEmail = document.getElementById("email");
+            var expresionRegular = /^([\w-\.]{3,}\@.+\..+)$/;
+            var email = convertirMinusculas(valorEmail.value);
+            email = comprobarAtEmail(email);
+            if (expresionRegular.test(email)) {
+                emailOk = true;
+                estilo2(valorEmail);
+            } else {
+                emailOk = false;
+                estiloRojo(valorEmail);
+            }
+        }
+
+        function convertirMinusculas(email) {
+            return email.toLowerCase();
+        }
+
+        function comprobarAtEmail(email) {
+            var expresion = /\sat\s/g;
+            return email.replace(expresion, '@');
+        }
+
+        function validarDatos() {
+            var msg = 'Los datos que debe rectificar son:';
+            if (nombreOk && apellidoOk && edadOk && emailOk) {
+                var nombre = document.getElementById("nombre").value;
+                var apellido = document.getElementById("apellido").value;
+                var edad = document.getElementById("edad").value;
+                var email = document.getElementById("email").value;
+
+                // Muestro los datos en el contenedor
+                document.getElementById("resultado").innerHTML = `
+                    <p><strong>Nombre:</strong> ${nombre}</p>
+                    <p><strong>Apellido:</strong> ${apellido}</p>
+                    <p><strong>Edad:</strong> ${edad}</p>
+                    <p><strong>Email:</strong> ${email}</p>
+                `;
+                return false; // Evito que se envíe el formulario
+            } else {
+                if (!nombreOk) {
+                    msg += ' nombre ';
+                }
+                if (!apellidoOk) {
+                    msg += ' apellido ';
+                }
+                if (!edadOk) {
+                    msg += ' edad ';
+                }
+                if (!emailOk) {
+                    msg += ' email ';
+                }
+                alert(msg);
+                return false;
+            }
+        }
+
+        function capturarNuevosDatos() {
+            // Limpia los campos del formulario y el resultado
+            document.getElementById("nombre").value = '';
+            document.getElementById("apellido").value = '';
+            document.getElementById("edad").value = '';
+            document.getElementById("email").value = '';
+            document.getElementById("resultado").innerHTML = '';
+            nombreOk = false;
+            apellidoOk = false;
+            edadOk = false;
+            emailOk = false;
+        }
+
+        function nuevoUsuario() {
+            capturarNuevosDatos();
+            saludarUsuario(); // Llamo nuevamente al saludo
+        }
+    </script>
+</body>
+</html>
