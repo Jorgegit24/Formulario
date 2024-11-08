@@ -1,0 +1,72 @@
+body { 
+    background-color: coral; 
+    font-family: Arial, sans-serif; 
+    padding: 20px;
+}
+
+h1 {
+    color: #2c3e50;
+}
+
+.formulario {
+    background-color: rgba(215, 130, 38, 0.713);
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 
+        0 4px 15px rgba(0, 0, 0, 0.1),  
+        0 10px 20px rgba(0, 0, 0, 0.50); 
+    width: 40%;
+    border: 1px solid #ccc; 
+    text-shadow: #2c3e50;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+input {
+    width: 80%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+input[type="submit"], input[type="reset"], button {
+    width: auto;
+    background-color: white;
+    color: black;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+input[type="submit"]:hover, input[type="reset"]:hover, button:hover {
+    background-color: #34495e;
+}
+
+img {
+    vertical-align: middle;
+    margin-left: 10px;
+}
+
+#resultado {
+    margin-top: 3%;
+    background-color: rgba(215, 130, 38, 0.713);
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 
+        0 4px 15px rgba(0, 0, 0, 0.1),  
+        0 10px 20px rgba(0, 0, 0, 0.50); 
+    width: 40%;
+    border: 1px solid #ccc; 
+    text-shadow: #2c3e50;
+}
+
+#saludo {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #2c3e50;
+}
